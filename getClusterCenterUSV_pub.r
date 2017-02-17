@@ -39,16 +39,24 @@ if(comArgs[2]=='wavs')
 	{
 		if(length(cTable[[cluster]])>as.numeric(comArgs[4]))
 		{
-			if(mes[[3]][paste("AE",cluster,sep="")]>=comArgs[3])
+			if(mes[[3]][paste("AE",cluster,sep="")]>=as.numeric(comArgs[3]))
 			{
-				#get correct filename
-				name.assign <- paste("%0",maxSylChar,"s",sep="")
-				name.out <- paste(dirIn,sprintf(name.assign,as.numeric(bestSylsOut[cluster])),".wav",sep="")
-	
+				if(.Platform$OS.type=="unix")
+				{
+					#get correct filename
+					name.assign <- paste("%0",maxSylChar,"s",sep="")
+					name.out <- paste(dirIn,sprintf(name.assign,as.numeric(bestSylsOut[cluster])),".wav",sep="")
+				}else if(.Platform$OS.type=="windows"){
+					#get correct filename
+					name.assign <- paste("%0",maxSylChar,"s",sep="")
+                	sylNum <- gsub(" ","0",sprintf(name.assign,as.numeric(bestSylsOut[cluster])))
+					name.out <- paste(dirIn,sylNum,".wav",sep="")
+				}
+				
 				#move wav file into spectro folder
 				file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",cluster,".wav",sep=""))
 			}
-			if(mes[[3]][paste("AE",cluster,sep="")]<comArgs[3])
+			if(mes[[3]][paste("AE",cluster,sep="")]<as.numeric(comArgs[3]))
 			{
 				if(is.matrix(groups))
 				{
@@ -61,8 +69,16 @@ if(comArgs[2]=='wavs')
 				name.assign <- paste("%0",maxSylChar,"s",sep="")
 				for (name in members)
 				{
-					name.out <- paste(dirIn,sprintf(name.assign,as.numeric(name)),".wav",sep="")
-					file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sprintf(name.assign,as.numeric(name)),".wav",sep=""))
+					if(.Platform$OS.type=="unix")
+					{
+						name.out <- paste(dirIn,sprintf(name.assign,as.numeric(name)),".wav",sep="")
+						file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sprintf(name.assign,as.numeric(name)),".wav",sep=""))
+					}else if(.Platform$OS.type=="windows"){
+						sylNum <- gsub(" ","0",sprintf(name.assign,as.numeric(name)))
+						name.out <- paste(dirIn,sylNum,".wav",sep="")
+						file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sylNum,".wav",sep=""))
+					}
+					
 				}
 			}
 		}else
@@ -77,8 +93,15 @@ if(comArgs[2]=='wavs')
 			name.assign <- paste("%0",maxSylChar,"s",sep="")
 			for (name in members)
 			{
-				name.out <- paste(dirIn,sprintf(name.assign,as.numeric(name)),".wav",sep="")
-	file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sprintf(name.assign,as.numeric(name)),".wav",sep=""))
+				if(.Platform$OS.type=="unix")
+				{
+					name.out <- paste(dirIn,sprintf(name.assign,as.numeric(name)),".wav",sep="")
+					file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sprintf(name.assign,as.numeric(name)),".wav",sep=""))
+				}else if(.Platform$OS.type=="windows"){
+					sylNum <- gsub(" ","0",sprintf(name.assign,as.numeric(name)))
+					name.out <- paste(dirIn,sylNum,".wav",sep="")
+                	file.copy(from=name.out,to=paste(dirIn,"matlab_wavs/",sylNum,".wav",sep=""))
+                }	
 			}
 		}
 		
