@@ -53,16 +53,31 @@ function voice_usv_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to voice_usv (see VARARGIN)
 
 % Choose default command line output for voice_usv
-handles.startdir = cd;
-handles.output = hObject;
-handles.edit5 = '0.80';
-handles.edit6 = '5';
+if isunix
+	handles.startdir = cd;
+	handles.output = hObject;
+	handles.edit5 = '0.80';
+	handles.edit6 = '5';
 
-handles.installdir = which('voice_usv.m');
-f = findstr('/',handles.installdir);
-handles.installdir = handles.installdir(1:max(f));
-set(handles.text22,'Visible','off');
-cd(handles.installdir);
+	handles.installdir = which('voice_usv.m');
+	f = findstr('/',handles.installdir);
+	handles.installdir = handles.installdir(1:max(f));
+	set(handles.text22,'Visible','off');
+	cd(handles.installdir);
+elseif ispc
+	handles.startdir = cd;
+	handles.output = hObject;
+	handles.edit5 = '0.80';
+	handles.edit6 = '5';
+
+	handles.installdir = which('voice_usv.m');
+	f = findstr('\',handles.installdir);
+	handles.installdir = handles.installdir(1:max(f));
+	set(handles.text22,'Visible','off');
+	cd(handles.installdir);
+else
+	error('Unable to determine OS.')
+end
 
 % Update handles structure
 guidata(hObject, handles);
@@ -86,11 +101,21 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-folder = uigetdir('~/Desktop/05F/cut_syllables','Select directory containing USVs to be clustered.');
-listofiles = dir(folder);
-handles.folder = folder;
-guidata(hObject,handles);
-set(handles.text2,'String', folder);
+if isunix
+	folder = uigetdir('Select directory containing USVs to be clustered.');
+	listofiles = dir(folder);
+	handles.folder = folder;
+	guidata(hObject,handles);
+	set(handles.text2,'String', folder);
+elseif ispc
+	folder = uigetdir('Select directory containing USVs to be clustered.');
+	listofiles = dir(folder);
+	handles.folder = folder;
+	guidata(hObject,handles);
+	set(handles.text2,'String', folder);
+else
+	error('Unable to determine OS.')
+end
 
 function edit1_Callback(hObject, eventdata, handles)
 % hObject    handle to edit1 (see GCBO)
@@ -111,8 +136,13 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles.foldern = strrep(handles.folder,' ','\ ');
-
-system(['/usr/local/bin/R --slave --args ' handles.foldern ' < renameWavs.r']);
+if isunix
+    system(['/usr/local/bin/R --slave --args ' handles.foldern ' < renameWavs.r']);
+elseif ispc
+    system(['R --slave --args ' handles.foldern ' < renameWavs.r']);
+else
+    error('Cannot determine OS.')
+end
 id = handles.edit1;
 set(handles.text5,'String','Running!');
 set(handles.text5,'Backgroundcolor','r');
@@ -134,7 +164,7 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[fileAssign1, pathAssign1] = uigetfile('~/Desktop/05F/cut_syllables/*.csv','Select similarity batch.');
+[fileAssign1, pathAssign1] = uigetfile('*.csv','Select similarity batch.');
 handles.fileAssign1 = strcat(pathAssign1,fileAssign1);
 guidata(hObject,handles);
 set(handles.text15,'String', fileAssign1);
@@ -234,7 +264,7 @@ function pushbutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[fileAssign2, pathAssign2] = uigetfile('~/Desktop/05F/cut_syllables/*.csv','Select similarity batch.');
+[fileAssign2, pathAssign2] = uigetfile('*.csv','Select similarity batch.');
 handles.fileAssign2 = strcat(pathAssign2,fileAssign2);
 handles.fileAssign2u = handles.fileAssign2;
 guidata(hObject,handles);
@@ -250,27 +280,14 @@ function pushbutton9_Callback(hObject, eventdata, handles)
 % variables out to it
 
 set(handles.text22,'Visible','on');
-setenv('DYLD_LIBRARY_PATH', '/usr/local/bin/');
-
-%[status,result]=system(['R --slave --args' ' ' handles.fileAssign1 ' < clusterUSV_pub.r']);
-%[status,result]=system(['R --slave --args' ' ' handles.fileAssign2 ' < clusterUSV_pub.r']);
-
-voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
+if isunix
+	setenv('DYLD_LIBRARY_PATH', '/usr/local/bin/');
+	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
+elseif ispc
+	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
 set(handles.text22,'Visible','off');
-
-
-% --- Executes on button press in checkbox1.
-function checkbox1_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of checkbox1
-blind = get(hObject,'Value')
-if blind == 1
-    handles.fileAssign2 = strcat(handles.installdir,'.blinding/SimilarityBatch_blind.csv')
 else
-    handles.fileAssign2 = handles.fileAssign2u
+    error('Unable to determine OS.')
 end
 
 function edit5_Callback(hObject, eventdata, handles)
@@ -296,8 +313,6 @@ function edit5_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
-
 
 function edit6_Callback(hObject, eventdata, handles)
 % hObject    handle to edit6 (see GCBO)

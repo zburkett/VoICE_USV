@@ -1,6 +1,5 @@
 library(WGCNA)
 comArgs <- commandArgs(TRUE)
-if(!exists("flashClust")){flashClust<-hclust}
 
 getGSMatrix = function(simbatch,n)
 {
@@ -44,7 +43,7 @@ clusterTableCreateNoData = function(syntax)
 	stat <- apply(data[,c(3:5)],1,prod,na.rm=TRUE)
 	data <- cbind(data,stat)
 	corMat <- getGSMatrix(data,sqrt(nrow(data)))
-	fc <- flashClust(as.dist(1-corMat),method="average")
+	fc <- hclust(as.dist(1-corMat),method="average")
 	groups <- cutreeDynamic(fc,minClusterSize=1,distM=as.matrix(1-corMat),deepSplit=1)
 	groups <- labels2colors(groups)
 	names(groups) <- rownames(corMat)
