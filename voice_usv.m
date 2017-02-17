@@ -136,8 +136,13 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles.foldern = strrep(handles.folder,' ','\ ');
-
-system(['/usr/local/bin/R --slave --args ' handles.foldern ' < renameWavs.r']);
+if isunix
+    system(['/usr/local/bin/R --slave --args ' handles.foldern ' < renameWavs.r']);
+elseif ispc
+    system(['R --slave --args ' handles.foldern ' < renameWavs.r']);
+else
+    error('Cannot determine OS.')
+end
 id = handles.edit1;
 set(handles.text5,'String','Running!');
 set(handles.text5,'Backgroundcolor','r');
@@ -279,7 +284,7 @@ if isunix
 	setenv('DYLD_LIBRARY_PATH', '/usr/local/bin/');
 	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
 elseif ispc
-	voiceUSV_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
+	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
 set(handles.text22,'Visible','off');
 else
     error('Unable to determine OS.')
