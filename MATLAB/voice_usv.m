@@ -65,6 +65,7 @@ if isunix
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
     cd('..');
+    handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
 elseif ispc
 	handles.startdir = cd;
@@ -78,6 +79,7 @@ elseif ispc
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
     cd('..');
+    handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
 else
 	error('Unable to determine OS.')
