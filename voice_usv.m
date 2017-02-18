@@ -62,6 +62,7 @@ if isunix
 	handles.installdir = which('voice_usv.m');
 	f = findstr('/',handles.installdir);
 	handles.installdir = handles.installdir(1:max(f));
+	system(['RScript packageCheck.r']);
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
 elseif ispc
@@ -73,6 +74,7 @@ elseif ispc
 	handles.installdir = which('voice_usv.m');
 	f = findstr('\',handles.installdir);
 	handles.installdir = handles.installdir(1:max(f));
+	system(['/usr/local/bin/R --slave --args ' handles.installdir ' < packageCheck.r']);
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
 else
