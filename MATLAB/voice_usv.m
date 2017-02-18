@@ -62,9 +62,10 @@ if isunix
 	handles.installdir = which('voice_usv.m');
 	f = findstr('/',handles.installdir);
 	handles.installdir = handles.installdir(1:max(f));
-	system(['RScript /R/packageCheck.r']);
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
+    cd('..');
+    system(['RScript ./R/packageCheck.r']);
 elseif ispc
 	handles.startdir = cd;
 	handles.output = hObject;
@@ -74,9 +75,10 @@ elseif ispc
 	handles.installdir = which('voice_usv.m');
 	f = findstr('\',handles.installdir);
 	handles.installdir = handles.installdir(1:max(f));
-	system(['RScript /R/packageCheck.r']);
 	set(handles.text22,'Visible','off');
 	cd(handles.installdir);
+    cd('..');
+    system(['RScript ./R/packageCheck.r']);
 else
 	error('Unable to determine OS.')
 end
@@ -139,9 +141,9 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 handles.foldern = strrep(handles.folder,' ','\ ');
 if isunix
-    system(['/usr/local/bin/R --slave --args ' handles.foldern ' < /R/renameWavs.r']);
+    system(['/usr/local/bin/R --slave --args ' handles.foldern ' < ./R/renameWavs.r']);
 elseif ispc
-    system(['R --slave --args ' handles.foldern ' < /R/renameWavs.r']);
+    system(['R --slave --args ' handles.foldern ' < ./R/renameWavs.r']);
 else
     error('Cannot determine OS.')
 end

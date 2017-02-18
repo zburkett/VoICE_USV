@@ -67,12 +67,12 @@ if isunix
 	handles.f2n = strrep(handles.f2,' ','\ ');
 
 	%Cluster syllables
-	[status,result]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1n ' < clusterUSV_pub.r']);
-	[status,result]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2n ' < clusterUSV_pub.r']);
+	[status,result]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1n ' < ./R/clusterUSV_pub.r']);
+	[status,result]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2n ' < ./R/clusterUSV_pub.r']);
 
 	%Generate .wav files for cohesive and split clusters
-	system(['/usr/local/bin/R --slave --args' ' ' handles.f1n ' ' 'wavs' ' ' handles.thresh ' ' handles.minsize ' < getClusterCenterUSV_pub.r']);
-	system(['/usr/local/bin/R --slave --args' ' ' handles.f2n ' ' 'wavs' ' ' handles.thresh ' ' handles.minsize ' < getClusterCenterUSV_pub.r']);
+	system(['/usr/local/bin/R --slave --args' ' ' handles.f1n ' ' 'wavs' ' ' handles.thresh ' ' handles.minsize ' < ./R/getClusterCenterUSV_pub.r']);
+	system(['/usr/local/bin/R --slave --args' ' ' handles.f2n ' ' 'wavs' ' ' handles.thresh ' ' handles.minsize ' < ./R/getClusterCenterUSV_pub.r']);
 
 	f = findstr('/',handles.f1);
 	handles.f1d = strcat(handles.f1(1:f(length(f))),'matlab_wavs/');
@@ -145,12 +145,12 @@ elseif ispc
 	handles.f2n = strrep(handles.f2,'\','/');
 
 	%Cluster syllables
-	[status,result]=system(['R --slave --args' ' ' char(34) handles.f1n char(34) ' < clusterUSV_pub.r']);
-	[status,result]=system(['R --slave --args' ' ' char(34) handles.f2n char(34) ' < clusterUSV_pub.r']);
+	[status,result]=system(['R --slave --args' ' ' char(34) handles.f1n char(34) ' < ./R/clusterUSV_pub.r']);
+	[status,result]=system(['R --slave --args' ' ' char(34) handles.f2n char(34) ' < ./R/clusterUSV_pub.r']);
 
 	%Generate .wav files for cohesive and split clusters
-	system(['R --slave --args' ' ' char(34) handles.f1n char(34) ' ' 'wavs' ' ' char(34) handles.thresh char(34) ' ' char(34) handles.minsize char(34) ' < getClusterCenterUSV_pub.r']);
-	system(['R --slave --args' ' ' char(34) handles.f2n char(34) ' ' 'wavs' ' ' char(34) handles.thresh char(34) ' ' char(34) handles.minsize char(34) ' < getClusterCenterUSV_pub.r']);
+	system(['R --slave --args' ' ' char(34) handles.f1n char(34) ' ' 'wavs' ' ' char(34) handles.thresh char(34) ' ' char(34) handles.minsize char(34) ' < ./R/getClusterCenterUSV_pub.r']);
+	system(['R --slave --args' ' ' char(34) handles.f2n char(34) ' ' 'wavs' ' ' char(34) handles.thresh char(34) ' ' char(34) handles.minsize char(34) ' < ./R/getClusterCenterUSV_pub.r']);
  
 	f = findstr('\',handles.f1);
 	handles.f1d = strcat(handles.f1(1:f(length(f))),'matlab_wavs\');
@@ -1125,11 +1125,11 @@ if isunix
 
 	% f = findstr('/',handles.dir1n);
 	% handles.dir1 = handles.dir1n(1:f(length(f)-1));
-	system(['/usr/local/bin/R --slave --args ' handles.dir1u ' < applyClassifications_pub.r']);
+	system(['/usr/local/bin/R --slave --args ' handles.dir1u ' < ./R/applyClassifications_pub.r']);
 
 	% f = findstr('/',handles.dir2n);
 	% handles.dir2 = handles.dir2n(1:f(length(f)-1));
-	system(['/usr/local/bin/R --slave --args ' handles.dir2u ' < applyClassifications_pub.r']);
+	system(['/usr/local/bin/R --slave --args ' handles.dir2u ' < ./R/applyClassifications_pub.r']);
 
 	set(handles.pushbutton17,'BackgroundColor','green');
 	set(handles.pushbutton18,'Visible','on');
@@ -1166,11 +1166,11 @@ elseif ispc
 
 	% f = findstr('/',handles.dir1n);
 	%handles.dir1 = handles.dir1n(1:f(length(f)-1));
-	system(['R --slave --args ' char(34) handles.dir1u char(34) ' < applyClassifications_pub.r']);
+	system(['R --slave --args ' char(34) handles.dir1u char(34) ' < ./R/applyClassifications_pub.r']);
 
 	% f = findstr('/',handles.dir2n);
 	% handles.dir2 = handles.dir2n(1:f(length(f)-1));
-	system(['R --slave --args ' char(34) handles.dir2u char(34) ' < applyClassifications_pub.r']);
+	system(['R --slave --args ' char(34) handles.dir2u char(34) ' < ./R/applyClassifications_pub.r']);
 
 	set(handles.pushbutton17,'BackgroundColor','green');
 	set(handles.pushbutton18,'Visible','on');
@@ -1197,11 +1197,11 @@ if isunix
 	f = findstr('/',handles.f1d);
 	handles.f1parent = handles.f1d(1:f(length(f)-1));
 	handles.f1parent = strrep(handles.f1parent,' ','\ ');
-	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1parent  ' < sortWavs.r']);
+	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1parent  ' < ./R/sortWavs.r']);
 	f = findstr('/',handles.f1d);
 	handles.f2parent = handles.f2d(1:f(length(f)-1));
 	handles.f2parent = strrep(handles.f2parent,' ','\ ');
-	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2parent  ' < sortWavs.r']);
+	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2parent  ' < ./R/sortWavs.r']);
 	set(handles.pushbutton18,'BackgroundColor','green');
 elseif ispc
 	set(handles.pushbutton18,'BackgroundColor','yellow');
@@ -1210,11 +1210,11 @@ elseif ispc
 	f = findstr('\',handles.f1d);
 	handles.f1parent = handles.f1d(1:f(length(f)-1));
 	handles.f1parent = strrep(handles.f1parent,'\','/');
-	[status,response]=system(['R --slave --args' ' ' char(34) handles.f1parent char(34)  ' < sortWavs.r']);
+	[status,response]=system(['R --slave --args' ' ' char(34) handles.f1parent char(34)  ' < ./R/sortWavs.r']);
 	f = findstr('\',handles.f2d);
 	handles.f2parent = handles.f2d(1:f(length(f)-1));
 	handles.f2parent = strrep(handles.f2parent,' ','\ ');
-	[status,response]=system(['R --slave --args' ' ' char(34) handles.f2parent char(34)  ' < sortWavs.r']);
+	[status,response]=system(['R --slave --args' ' ' char(34) handles.f2parent char(34)  ' < ./R/sortWavs.r']);
 	set(handles.pushbutton18,'BackgroundColor','green');
 else
 	error('Unable to determine OS.')
@@ -1232,11 +1232,11 @@ if isunix
 	f = findstr('/',handles.f1d);
 	handles.f1parent = handles.f1d(1:f(length(f)-1));
 	handles.f1parent = strrep(handles.f1parent,' ','\ ');
-	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1parent  ' < usvPieChart.r']);
+	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f1parent  ' < ./R/usvPieChart.r']);
 	f = findstr('/',handles.f2d);
 	handles.f2parent = handles.f2d(1:f(length(f)-1));
 	handles.f2parent = strrep(handles.f2parent,' ','\ ');
-	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2parent  ' < usvPieChart.r']);
+	[status,response]=system(['/usr/local/bin/R --slave --args' ' ' handles.f2parent  ' < ./R/usvPieChart.r']);
 	set(handles.pushbutton19,'BackgroundColor','green');
 elseif ispc
 	set(handles.pushbutton19,'BackgroundColor','yellow');
@@ -1244,11 +1244,11 @@ elseif ispc
 	f = findstr('\',handles.f1d);
 	handles.f1parent = handles.f1d(1:f(length(f)-1));
 	handles.f1parent = strrep(handles.f1parent,'\','/');
-	[status,response]=system(['R --slave --args' ' ' char(34) handles.f1parent char(34) ' < usvPieChart.r']);
+	[status,response]=system(['R --slave --args' ' ' char(34) handles.f1parent char(34) ' < ./R/usvPieChart.r']);
 	f = findstr('\',handles.f2d);
 	handles.f2parent = handles.f2d(1:f(length(f)-1));
 	handles.f2parent = strrep(handles.f2parent,'\','/');
-	[status,response]=system(['R --slave --args' ' ' handles.f2parent  ' < usvPieChart.r']);
+	[status,response]=system(['R --slave --args' ' ' handles.f2parent  ' < ./R/usvPieChart.r']);
 	set(handles.pushbutton19,'BackgroundColor','green');
 else
 	error('Unable to determine OS type.')
