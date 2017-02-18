@@ -1,0 +1,5 @@
+#.gitignore for voice_usv
+
+.Rapp.history
+.dropbox
+.DS_store
