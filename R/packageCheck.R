@@ -13,16 +13,37 @@ if(!file.exists('./R/.pkgSuccess'))
 		{
 			#print(pkg)
 			source("https://bioconductor.org/biocLite.R")
-			res = try(install.packages(pkg))
-			if(class(res)=="try-error")
+			if(.Platform$OS.type=="windows" & file.access(.libPaths()[length(.libPaths())], mode=2)==-1) #R library not writable in Windows, will make custom library and install packages there
 			{
-				res2 = biocLite(pkg)
-				
-				if (class(res2)=="try-error")
+                if(!file.exists("./.libraries"))
+                {
+                    system('mkdir ./.libraries')
+                    system('attrib +h ".libraries"')
+                }
+				res = try(install.packages(pkg,lib="./.libraries"))
+				if(class(res)=="try-error")
 				{
-					errs = 1
-					stop(paste('Unable to install R package', pkg,". Please try to troubleshoot this yourself."))
+					res2 = biocLite(pkg,lib="./.libraries")
+				
+					if (class(res2)=="try-error")
+					{
+						errs = 1
+						stop(paste('Unable to install R package', pkg,". Please try to troubleshoot this yourself."))
+					}
 				}
+			}else{
+				res = try(install.packages(pkg))
+				if(class(res)=="try-error")
+				{
+					res2 = biocLite(pkg)
+				
+					if (class(res2)=="try-error")
+					{
+						errs = 1
+						stop(paste('Unable to install R package', pkg,". Please try to troubleshoot this yourself."))
+					}
+				}
+
 			}
 		}
 	}else{
