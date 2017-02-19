@@ -1,6 +1,15 @@
 #.gitignore for voice_usv
 
 .pkgSuccess
+SimilarityBatch*
+assignments.csv
+joined_clusters_pie
+matlab_wavs
+original_filenames.txt
+pieChart.pdf
+sorted_syllables_clusters
+sorted_syllables_pie
+.libraries
 
 .Rapp.history
 .dropbox
@@ -11,7 +20,8 @@
 .Rapp.history
 
 # Session Data files
-.RData
+*.RData
+*.rdata
 
 # Example code in package build process
 *-Ex.R
