@@ -1,5 +1,5 @@
 comArgs <- commandArgs(TRUE)
-files <- list.files(comArgs[1],pattern="*.wav")
+files <- list.files(comArgs[1],pattern="*.wav$")
 renamed <- files
 name.assign <- paste("%0",nchar(length(files)),"s",sep="")
 newNames <- c(1:length(files))
