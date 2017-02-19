@@ -1,30 +1,34 @@
-chooseCRANmirror(ind=1)
-print('Checking to see if you have all the required R packages...')
-deps = tools::package_dependencies("WGCNA",recursive=T,db=available.packages())[[1]]
-inst = installed.packages()
-toInstall = deps[!deps%in%inst[,1]]
-
-if(length(toInstall)>0)
+if(!file.exists('./R/.pkgSuccess'))
 {
-	print('Installing missing R packages. Please wait. You should only have to do this once.')
-	for(pkg in toInstall)
+	chooseCRANmirror(ind=1)
+	print('Checking to see if you have all the required R packages...')
+	deps = tools::package_dependencies("WGCNA",recursive=T,db=available.packages())[[1]]
+	inst = installed.packages()
+	toInstall = deps[!deps%in%inst[,1]]
+	
+	if(length(toInstall)>0)
 	{
-		#print(pkg)
-		source("https://bioconductor.org/biocLite.R")
-		res = try(install.packages(pkg))
-		if(class(res)=="try-error")
+		print('Installing missing R packages. Please wait. You should only have to do this once.')
+		for(pkg in toInstall)
 		{
-			res2 = biocLite(pkg)
-			
-			if (class(res2)=="try-error")
+			#print(pkg)
+			source("https://bioconductor.org/biocLite.R")
+			res = try(install.packages(pkg))
+			if(class(res)=="try-error")
 			{
-				stop(paste('Unable to install R package', pkg,". Please try to troubleshoot this yourself."))
+				res2 = biocLite(pkg)
+				
+				if (class(res2)=="try-error")
+				{
+					errs = 1
+					stop(paste('Unable to install R package', pkg,". Please try to troubleshoot this yourself."))
+				}
 			}
 		}
-
-		
+	}else{
+		print('All packages found. Proceeding.')
 	}
-}else{
-	print('All packages found. Proceeding.')
+	
+	if(!exists("errs")){system(paste("touch","./R/.pkgSuccess"))}
 }
 

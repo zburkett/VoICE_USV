@@ -54,6 +54,8 @@ function voice_usv_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for voice_usv
 if isunix
+	PATH = getenv('PATH');
+	setenv('PATH',[PATH ':/usr/local/bin']);
 	handles.startdir = cd;
 	handles.output = hObject;
 	handles.edit5 = '0.80';
