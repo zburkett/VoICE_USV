@@ -31,7 +31,7 @@ Add the unzipped directory with subfolders to your MATLAB path. Optionally, you 
 
 Mac OS X
 --------
-VoICE_USV relies on external software that must be installed prior to running VoICE_USV. VoICE_USV will check for these programs and halt if they are not found. If they are installed but not in the system path, VoICE_USV will attempt to add them.
+VoICE_USV relies on external software (SoX and R) that must be installed prior to running VoICE_USV. VoICE_USV will check for these programs and halt if they are not found. If they are installed but not in the system path, VoICE_USV will attempt to add them.
 
 Instructions below will install Homebrew and then SoX. If you wish to install SoX by some other means, just be sure that it's accessible via the command line.
 
@@ -57,7 +57,7 @@ brew install r
 
 Windows
 -------
-VoICE_USV relies on external software that must be installed prior to running VoICE_USV. VoICE_USV will check for these programs and halt if they are not found. If they are installed but not in the system path, VoICE_USV will attempt to add them.
+VoICE_USV relies on external software (SoX and R) that must be installed prior to running VoICE_USV. VoICE_USV will check for these programs and halt if they are not found. If they are installed but not in the system path, VoICE_USV will attempt to add them.
 
 SoX is available here: https://sourceforge.net/projects/sox/files/sox/
 
