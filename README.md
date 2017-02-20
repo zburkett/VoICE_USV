@@ -1,7 +1,9 @@
 VoICE_USV
 ========
-Vocal Inventory Clustering Engine -- Ultrasonic Vocalizations\n
-Zachary Burkett\n
+Vocal Inventory Clustering Engine -- Ultrasonic Vocalizations
+
+Zachary Burkett
+
 http://www.nature.com/articles/srep10237
 
 AUTHOR/SUPPORT
@@ -10,9 +12,7 @@ Zachary Burkett, zburkett@ucla.edu
 
 MANUAL
 ======
-https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf
-
-[RELEASEnotes](RELEASEnotes.md) contains detailed information about the latest major release
+TBD
 
 DIRECTORY CONTENTS
 ==================
@@ -57,6 +57,7 @@ Windows
 VoICE_USV relies on external software that must be installed prior to running VoICE_USV. VoICE_USV will check for these programs and halt if they are not found. If they are installed but not in the system path, VoICE_USV will attempt to add them.
 
 SoX is available here: https://sourceforge.net/projects/sox/files/sox/
+
 R is available here: https://cloud.r-project.org
 
 Developers
