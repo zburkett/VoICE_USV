@@ -1,7 +1,7 @@
 VoICE_USV
 ========
-Vocal Inventory Clustering Engine -- Ultrasonic Vocalizations
-Zachary Burkett
+Vocal Inventory Clustering Engine -- Ultrasonic Vocalizations\n
+Zachary Burkett\n
 http://www.nature.com/articles/srep10237
 
 AUTHOR/SUPPORT
