@@ -86,7 +86,33 @@ elseif ispc
 	handles.output = hObject;
 	handles.edit5 = '0.80';
 	handles.edit6 = '5';
-
+    
+    %check for R installation
+    [status,result] = system('where Rscript');
+    if ~exist(strcat(result))
+        error('No R installation detected. Please install R and try again.')
+    end
+    
+    %check for SoX installation
+    [status0,result0] = system('where sox');
+    if ~status0 == 0
+        disp('SoX not found in system path, checking for installation...')
+        [status,result] = system('cd \"Program Files" & dir /b/s sox.exe');
+        if ~exist(strcat(result))
+            error('No SoX installation detected in Program Files. Install SoX and try again.')
+        elseif exist(strcat(result))
+            disp('Found SoX install, adding to PATH...')
+            [pathstr,name,ext] = fileparts(result);
+            setenv('PATH',[getenv('PATH') strcat(';',pathstr)]);
+            [status3,result3] = system('where sox');
+            if ~status3 == 0
+                disp('Unable to add SoX to PATH. Please remedy this yourself.')
+            else
+                disp('Added SoX to PATH. Launching VoICE_USV.')
+            end
+        end
+    end
+            
 	handles.installdir = which('voice_usv.m');
 	f = findstr('\',handles.installdir);
 	handles.installdir = handles.installdir(1:max(f));
