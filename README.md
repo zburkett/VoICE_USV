@@ -70,8 +70,8 @@ SOFTWARE REQUIREMENTS
 ==============================
   * MATLAB (Tested up through R2015a; unsure of support for more recent versions)
   * MATLAB Signal Processing Toolbox
-  * R
-  * SoX
+  * R (See installation, above)
+  * SoX (See installation, above)
 
 LIMITATIONS
 ===========
