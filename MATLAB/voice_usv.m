@@ -60,6 +60,18 @@ if isunix
 	handles.output = hObject;
 	handles.edit5 = '0.80';
 	handles.edit6 = '5';
+    
+    %check for R installation
+    [status,result] = system('which Rscript');
+    if ~exist(strcat(result))
+        error('No R installation detected.')
+    end
+    
+    %check for SoX installation
+    [status,result] = system('which sox');
+    if ~exist(strcat(result))
+        error('No SoX installation detected.')
+    end
 
 	handles.installdir = which('voice_usv.m');
 	f = findstr('/',handles.installdir);
