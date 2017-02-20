@@ -63,40 +63,16 @@ R is available here: https://cloud.r-project.org
 Developers
 ==========
 
-STAR developers with write access to https://github.com/alexdobin/STAR can update the `STAR-Fusion`
-submodule to a specific tag by following these steps:
-
-```bash
-git clone --recursive https://github.com/alexdobin/STAR.git
-cd STAR
-# or:
-#
-# git clone //github.com/alexdobin/STAR.git
-# cd STAR
-# git git submodule update --init --recursive
-
-# checkout a specific tag for the submodule
-cd STAR-Fusion
-git checkout v0.3.1
-
-# Commit the change
-cd ../
-git add STAR-Fusion
-git commit -m "Updated STAR-Fusion to v0.3.1"
-
-# Push the change to GitHub
-git push
-```
+Pull requests are welcome!
 
 
-HARDWARE/SOFTWARE REQUIREMENTS
+SOFTWARE REQUIREMENTS
 ==============================
-  * x86-64 compatible processors
-  * 64 bit Linux or Mac OS X 
-  * 30GB of RAM for human genome 
-
+  * MATLAB (Tested up through R2015a; unsure of support for more recent versions)
+  * MATLAB Signal Processing Toolbox
+  * R
+  * SoX
 
 LIMITATIONS
 ===========
-This release was tested with the default parameters for human and mouse genomes.
-Please contact the author for a list of recommended parameters for much larger or much smaller genomes.
+Input calls must be provided as a single call per .wav file. We do not offer software to accomplish this since it is highly specific to the recording setup. Manual cutting of .wav files can be accomplished using any number of audio manipulation tools, such as Audacity (http://www.audacityteam.org).
