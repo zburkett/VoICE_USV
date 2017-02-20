@@ -12,15 +12,18 @@ Zachary Burkett, zburkett@ucla.edu
 
 MANUAL
 ======
-TBD
+Coming Soon.
 
 DIRECTORY CONTENTS
 ==================
-  * TBD
-
+  * MATLAB: Contains all MATLAB functions
+  * R: Contains all R functions
+  * sample_data: Contains 20 .wav files of ultrasonic vocalizations, see walkthrough in the Manual
+  * README.md: README, see below
 
 INSTALLATION
 =====================
+Typing 'voice_usv' at the MATLAB command prompt will launch the software following installation. Please see installation instructions for your operating system.
 
 Download this directory and unzip to a location in which you would like to store the software.
 
@@ -63,7 +66,7 @@ R is available here: https://cloud.r-project.org
 Developers
 ==========
 
-Pull requests are welcome!
+Pull requests are welcomed!
 
 
 SOFTWARE REQUIREMENTS
