@@ -19,7 +19,7 @@ DIRECTORY CONTENTS
   * MATLAB: Contains all MATLAB functions
   * R: Contains all R functions
   * sample_data: Contains 20 .wav files of ultrasonic vocalizations, see walkthrough in the Manual
-  * README.md: README, see below
+  * README.md: README, you're looking at it
 
 INSTALLATION
 =====================
