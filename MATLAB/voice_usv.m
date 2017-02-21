@@ -27,11 +27,11 @@ function varargout = voice_usv(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @voice_usv_OpeningFcn, ...
-                   'gui_OutputFcn',  @voice_usv_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @voice_usv_OpeningFcn, ...
+    'gui_OutputFcn',  @voice_usv_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -54,12 +54,12 @@ function voice_usv_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for voice_usv
 if isunix
-	PATH = getenv('PATH');
-	setenv('PATH',[PATH ':/usr/local/bin']);
-	handles.startdir = cd;
-	handles.output = hObject;
-	handles.edit5 = '0.80';
-	handles.edit6 = '5';
+    PATH = getenv('PATH');
+    setenv('PATH',[PATH ':/usr/local/bin']);
+    handles.startdir = cd;
+    handles.output = hObject;
+    handles.edit5 = '0.80';
+    handles.edit6 = '5';
     
     %check for R installation
     [status,result] = system('which Rscript');
@@ -82,10 +82,10 @@ if isunix
     handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
 elseif ispc
-	handles.startdir = cd;
-	handles.output = hObject;
-	handles.edit5 = '0.80';
-	handles.edit6 = '5';
+    handles.startdir = cd;
+    handles.output = hObject;
+    handles.edit5 = '0.80';
+    handles.edit6 = '5';
     
     %check for R installation
     [status,result] = system('where Rscript');
@@ -122,7 +122,7 @@ elseif ispc
             end
         end
     end
-            
+    
     handles.installdir = which('voice_usv.m');
     f = findstr('\',handles.installdir);
     handles.installdir = handles.installdir(1:max(f));
@@ -132,7 +132,7 @@ elseif ispc
     handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
 else
-	error('Unable to determine OS.')
+    error('Unable to determine OS.')
 end
 
 % Update handles structure
@@ -143,7 +143,7 @@ guidata(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = voice_usv_OutputFcn(hObject, eventdata, handles) 
+function varargout = voice_usv_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -158,19 +158,19 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 if isunix
-	folder = uigetdir('Select directory containing USVs to be clustered.');
-	listofiles = dir(folder);
-	handles.folder = folder;
-	guidata(hObject,handles);
-	set(handles.text2,'String', folder);
+    folder = uigetdir('Select directory containing USVs to be clustered.');
+    listofiles = dir(folder);
+    handles.folder = folder;
+    guidata(hObject,handles);
+    set(handles.text2,'String', folder);
 elseif ispc
-	folder = uigetdir('Select directory containing USVs to be clustered.');
-	listofiles = dir(folder);
-	handles.folder = folder;
-	guidata(hObject,handles);
-	set(handles.text2,'String', folder);
+    folder = uigetdir('Select directory containing USVs to be clustered.');
+    listofiles = dir(folder);
+    handles.folder = folder;
+    guidata(hObject,handles);
+    set(handles.text2,'String', folder);
 else
-	error('Unable to determine OS.')
+    error('Unable to determine OS.')
 end
 
 function edit1_Callback(hObject, eventdata, handles)
