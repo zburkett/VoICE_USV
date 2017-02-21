@@ -96,19 +96,29 @@ elseif ispc
     %check for SoX installation
     [status0,result0] = system('where sox');
     if ~status0 == 0
-        disp('SoX not found in system path, checking for installation...')
-        [status,result] = system('cd \"Program Files" & dir /b/s sox.exe');
-        if ~exist(strcat(result))
-            error('No SoX installation detected in Program Files. Install SoX and try again.')
-        elseif exist(strcat(result))
-            disp('Found SoX install, adding to PATH...')
-            [pathstr,name,ext] = fileparts(result);
+        if exist('.soxFound')
+            pathstr = char(textread('.soxFound','%q'));
             setenv('PATH',[getenv('PATH') strcat(';',pathstr)]);
-            [status3,result3] = system('where sox');
-            if ~status3 == 0
-                disp('Unable to add SoX to PATH. Please remedy this yourself.')
-            else
-                disp('Added SoX to PATH. Launching VoICE_USV.')
+        elseif ~status0 == 0 & ~exist('.soxFound')
+            disp('SoX not found in system path, checking for installation...')
+            [status,result] = system('cd \"Program Files" & dir /b/s sox.exe');
+            if ~exist(strcat(result))
+                error('No SoX installation detected in Program Files. Install SoX and try again.')
+            elseif exist(strcat(result))
+                disp('Found SoX install, adding to PATH...')
+                [pathstr,name,ext] = fileparts(result);
+                setenv('PATH',[getenv('PATH') strcat(';',pathstr)]);
+                [status3,result3] = system('where sox');
+                if ~status3 == 0
+                    disp('Unable to add SoX to PATH. Please remedy this yourself.')
+                else
+                    disp('Added SoX to PATH. Proceeding.')
+                    fid = fopen('.soxFound','wt');
+                    out = strrep(pathstr,'\','\\');
+                    fprintf(fid,[char(34) out char(34)]);
+                    fclose(fid);
+                    system('attrib +h .soxFound');
+                end
             end
         end
     end

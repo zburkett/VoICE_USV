@@ -2,7 +2,9 @@ if(!file.exists('./R/.pkgSuccess'))
 {
 	chooseCRANmirror(ind=1)
 	print('Checking to see if you have all the required R packages...')
+	primaryPkgs <- c("WGCNA")
 	deps = tools::package_dependencies("WGCNA",recursive=T,db=available.packages())[[1]]
+	deps = c(deps,primaryPkgs)
 	inst = installed.packages()
 	toInstall = deps[!deps%in%inst[,1]]
 	
