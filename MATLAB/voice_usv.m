@@ -72,12 +72,12 @@ if isunix
     if ~exist(strcat(result))
         error('No SoX installation detected.')
     end
-
-	handles.installdir = which('voice_usv.m');
-	f = findstr('/',handles.installdir);
-	handles.installdir = handles.installdir(1:max(f));
-	set(handles.text22,'Visible','off');
-	cd(handles.installdir);
+    
+    handles.installdir = which('voice_usv.m');
+    f = findstr('/',handles.installdir);
+    handles.installdir = handles.installdir(1:max(f));
+    set(handles.text22,'Visible','off');
+    cd(handles.installdir);
     cd('..');
     handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
@@ -123,11 +123,11 @@ elseif ispc
         end
     end
             
-	handles.installdir = which('voice_usv.m');
-	f = findstr('\',handles.installdir);
-	handles.installdir = handles.installdir(1:max(f));
-	set(handles.text22,'Visible','off');
-	cd(handles.installdir);
+    handles.installdir = which('voice_usv.m');
+    f = findstr('\',handles.installdir);
+    handles.installdir = handles.installdir(1:max(f));
+    set(handles.text22,'Visible','off');
+    cd(handles.installdir);
     cd('..');
     handles.installdir = pwd;
     system(['RScript ./R/packageCheck.r']);
@@ -337,11 +337,11 @@ function pushbutton9_Callback(hObject, eventdata, handles)
 
 set(handles.text22,'Visible','on');
 if isunix
-	setenv('DYLD_LIBRARY_PATH', '/usr/local/bin/');
-	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
+    setenv('DYLD_LIBRARY_PATH', '/usr/local/bin/');
+    voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
 elseif ispc
-	voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
-set(handles.text22,'Visible','off');
+    voice_usv_assign({handles.fileAssign1},{handles.fileAssign2},{handles.edit5},{handles.edit6});
+    set(handles.text22,'Visible','off');
 else
     error('Unable to determine OS.')
 end
