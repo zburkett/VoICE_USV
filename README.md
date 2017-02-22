@@ -24,12 +24,16 @@ Directory Contents
   * README.md: README, you're looking at it
 
 Installation
-=====================
-Download this directory and unzip to a location in which you would like to store the software.
+============
+1. Complete the steps below specific to your operating system.
 
-Typing 'voice_usv' at the MATLAB command prompt will launch the software following installation. Please see installation instructions for your operating system.
+2. Download this directory and unzip to a location in which you would like to store the software.
 
-Add the unzipped directory with subfolders to your MATLAB path. Optionally, you may remove the .git/ subfolders.
+3. Add the unzipped directory with subfolders to your MATLAB path. Optionally, you may remove the .git/ subfolders.
+
+4. Typing 'voice' at the MATLAB command prompt will launch the software.
+
+5. The intial launch of VoICE will check your system for installed dependencies and the necessary R packages. This will only need to happen once.
 
 Mac OS X
 --------
