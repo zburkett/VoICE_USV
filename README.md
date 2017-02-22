@@ -6,7 +6,7 @@ Zachary Burkett
 
 http://www.nature.com/articles/srep10237
 
-VoICE_USV is for analysis of rodent ultrasonic vocalizations. If you're interested in analyzing bird songs, go to [https://github.com/zburkett/VoICE] VoICE.
+VoICE_USV is for analysis of rodent ultrasonic vocalizations. If you're interested in analyzing bird songs, go to [https://github.com/zburkett/VoICE]VoICE.
 
 Author/Support
 ==============
