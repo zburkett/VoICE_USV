@@ -46,7 +46,7 @@ To install SoX:
 brew install sox
 ```
 
-VoICE_USV also relies on R. R should be included with Mac OS X. If for some reason it is missing, please download and install R from https://cloud.r-project.org or by:
+VoICE_USV also relies on R. R should be included with Mac OS X. If it is missing, please download and install R from https://cloud.r-project.org or by:
 ```bash
 # Install Homebrew if not already done for SoX:
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
