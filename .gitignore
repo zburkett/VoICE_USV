@@ -11,7 +11,7 @@ sorted_syllables_clusters
 sorted_syllables_pie
 joined_clusters_clusters
 .libraries
-.docx
+*.docx
 
 .Rapp.history
 .dropbox
