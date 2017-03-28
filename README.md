@@ -14,7 +14,11 @@ Zachary Burkett, zburkett@ucla.edu
 
 Software Tutorial/Walkthrough
 =============================
-A brief overview of VoICE's functionality and step-by-step instructions for using VoICE on the sample_data directory are available in the [walkthrough](https://github.com/zburkett/VoICE_USV/blob/master/walkthrough.pdf).
+Video Tutorials:
+  * Installation
+  * Clustering USVs
+
+We also have the [walkthrough](https://github.com/zburkett/VoICE_USV/blob/master/walkthrough.pdf) for the previous version of VoICE_USV available, though it does not reflect changes made between that which launched with the software and the current version.
 
 Directory Contents
 ==================
@@ -30,9 +34,9 @@ Installation
 
 2. Download this directory and unzip to a location in which you would like to store the software.
 
-3. Add the unzipped directory with subfolders to your MATLAB path. Optionally, you may remove the .git/ subfolders.
+3. Add the unzipped directory with subfolders to your MATLAB path.
 
-4. Typing 'voice' at the MATLAB command prompt will launch the software.
+4. Typing 'voice_usv' at the MATLAB command prompt will launch the software.
 
 5. The intial launch of VoICE will check your system for installed dependencies and the necessary R packages. This will only need to happen once.
 
@@ -72,7 +76,7 @@ R is available here: https://cloud.r-project.org
 
 Software Requirements
 =====================
-  * MATLAB (Tested up through R2015a; unsure of support for more recent versions)
+  * MATLAB (Tested through R2016a)
   * MATLAB Signal Processing Toolbox
   * R (See installation, above)
   * SoX (See installation, above)
