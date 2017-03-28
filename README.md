@@ -15,7 +15,7 @@ Zachary Burkett, zburkett@ucla.edu
 Software Tutorial/Walkthrough
 =============================
 Video Tutorials:
-  * Installation
+  * [Installation](https://youtu.be/UBOvYhhWrKU)
   * Clustering USVs
 
 We also have the [walkthrough](https://github.com/zburkett/VoICE_USV/blob/master/walkthrough.pdf) for the previous version of VoICE_USV available, though it does not reflect changes made between that which launched with the software and the current version.
